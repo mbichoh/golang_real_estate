@@ -1,0 +1,16 @@
+{{ define "base" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate | {{template "title" .}}</title>
+</head>
+<body>
+    <h1>REAL ESTATE</h1>
+    {{ template "body" .}}
+
+    {{ template "footer" .}}
+</body>
+</html>
+{{ end }}
