@@ -31,7 +31,21 @@ func (m *EstateModel) Insert(agentID int, name string, address string, county st
 
 //fetch single/specific estate using its id
 func (m *EstateModel) Get(id int) (*models.Estate, error){
-	return nil, nil
+
+	stmt := `SELECT name, address, county, price FROM estate WHERE id = ?`;
+
+	row := m.DB.QueryRow(stmt, id)
+
+	s := &models.Estate{}
+
+	err := row.Scan(&s.Name, &s.Address, &s.County, &s.Price)
+	if err == sql.ErrNoRows{
+		return nil, models.ErrNoRecord
+	}else if err != nil{
+		return nil, err
+	}
+
+	return s, nil
 }
 
 //fetch all estates limit(10) for pagination later

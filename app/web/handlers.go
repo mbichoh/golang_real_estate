@@ -5,6 +5,8 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+
+	"github.com/mbichoh/real_estate/pkg/models"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
@@ -41,7 +43,16 @@ func (app *application) showEstate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "The Estate in page ID %d", id)
+	s, err := app.estates.Get(id)
+	if err == models.ErrNoRecord{
+		app.notFound(w)
+		return
+	}else if err != nil{
+		app.serverError(w, err)
+		return
+	}
+
+	fmt.Fprintf(w, "%v", s)
 }
 
 func (app *application) createEstate(w http.ResponseWriter, r *http.Request) {
