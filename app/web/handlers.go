@@ -15,12 +15,12 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	}
 
 	e, err := app.estates.Latest()
-	if err != nil{
+	if err != nil {
 		app.serverError(w, err)
 		return
 	}
 
-	for _, estate := range e{
+	for _, estate := range e {
 		fmt.Fprintf(w, "%v\n", estate)
 	}
 

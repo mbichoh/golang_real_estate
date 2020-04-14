@@ -54,7 +54,7 @@ func (m *EstateModel) Latest() ([]*models.Estate, error) {
 	stmt := `SELECT id, name, address, county, bedroom, washroom, price, space_area, short_desc FROM estate`
 
 	rows, err := m.DB.Query(stmt)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 
@@ -66,14 +66,14 @@ func (m *EstateModel) Latest() ([]*models.Estate, error) {
 		e := &models.Estate{}
 
 		err = rows.Scan(&e.ID, &e.Name, &e.Address, &e.County, &e.Bedroom, &e.Washroom, &e.Price, &e.SpaceArea, &e.ShortDesc)
-		if err != nil{
+		if err != nil {
 			return nil, err
 		}
-		
+
 		estates = append(estates, e)
 	}
 
-	if err = rows.Err(); err != nil{
+	if err = rows.Err(); err != nil {
 		return nil, err
 	}
 
