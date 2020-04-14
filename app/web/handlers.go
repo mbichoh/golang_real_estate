@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 	"strconv"
 
@@ -15,24 +14,34 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	files := []string{
-		"./ui/html/home.page.tmpl",
-		"./ui/html/base.layout.tmpl",
-		"./ui/html/_footer.partial.tmpl",
-		"./ui/html/_header.partial.tmpl",
-		"./ui/html/_javascript.partial.tmpl",
-	}
-
-	ts, err := template.ParseFiles(files...)
-	if err != nil {
-		app.serverError(w, err) //using serverError helper
+	e, err := app.estates.Latest()
+	if err != nil{
+		app.serverError(w, err)
 		return
 	}
 
-	err = ts.Execute(w, nil)
-	if err != nil {
-		app.serverError(w, err) //using serverError helper
+	for _, estate := range e{
+		fmt.Fprintf(w, "%v\n", estate)
 	}
+
+	// files := []string{
+	// 	"./ui/html/home.page.tmpl",
+	// 	"./ui/html/base.layout.tmpl",
+	// 	"./ui/html/_footer.partial.tmpl",
+	// 	"./ui/html/_header.partial.tmpl",
+	// 	"./ui/html/_javascript.partial.tmpl",
+	// }
+
+	// ts, err := template.ParseFiles(files...)
+	// if err != nil {
+	// 	app.serverError(w, err) //using serverError helper
+	// 	return
+	// }
+
+	// err = ts.Execute(w, nil)
+	// if err != nil {
+	// 	app.serverError(w, err) //using serverError helper
+	// }
 }
 
 func (app *application) showEstate(w http.ResponseWriter, r *http.Request) {
@@ -44,10 +53,10 @@ func (app *application) showEstate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	s, err := app.estates.Get(id)
-	if err == models.ErrNoRecord{
+	if err == models.ErrNoRecord {
 		app.notFound(w)
 		return
-	}else if err != nil{
+	} else if err != nil {
 		app.serverError(w, err)
 		return
 	}
@@ -75,7 +84,7 @@ func (app *application) createEstate(w http.ResponseWriter, r *http.Request) {
 	price := 120000.00
 
 	id, err := app.estates.Insert(agentID, name, address, county, shortDesc, longDesc, bedroom, washroom, spaceArea, packing, price)
-	if err != nil{
+	if err != nil {
 		app.serverError(w, err)
 		return
 	}
