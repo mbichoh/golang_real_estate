@@ -27,6 +27,6 @@ type Estate struct {
 	Washroom  int
 	SpaceArea int
 	Packing   int
-	Price     bool
+	Price     float64
 	CreatedAt time.Time
 }

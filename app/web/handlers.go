@@ -50,5 +50,25 @@ func (app *application) createEstate(w http.ResponseWriter, r *http.Request) {
 		app.clientError(w, http.StatusMethodNotAllowed) // Using the clientError() helper.
 		return
 	}
-	w.Write([]byte("Create new estate"))
+
+	agentID := 1
+	name := "Nyumba Itu"
+	address := "Baricho"
+	county := "Kirinyaga"
+	shortDesc := "Pretty nice home"
+	longDesc := "As the description, You will never get such an awesome, amaizing place. Its dope and fashioned just as you like"
+	bedroom := 2
+	washroom := 2
+	spaceArea := 1290
+	packing := 1
+	price := 120000.00
+
+	id, err := app.estates.Insert(agentID, name, address, county, shortDesc, longDesc, bedroom, washroom, spaceArea, packing, price)
+	if err != nil{
+		app.serverError(w, err)
+		return
+	}
+
+	http.Redirect(w, r, fmt.Sprintf("/estate?id=%d", id), http.StatusSeeOther)
+
 }
