@@ -7,13 +7,15 @@ import (
 	"net/http"
 	"os"
 
-	_ "github.com/go-sql-driver/mysql" // New import
+	_ "github.com/go-sql-driver/mysql" // mysql import
+	"github.com/mbichoh/real_estate/pkg/models/mysql"
 )
 
 //aplication struct to hold the application wide dependencies for the web app
 type application struct {
 	errorLog *log.Logger
 	infoLog  *log.Logger
+	estates  *mysql.EstateModel
 }
 
 func main() {
@@ -39,6 +41,7 @@ func main() {
 	app := &application{
 		errorLog: errorLog,
 		infoLog:  infoLog,
+		estates:  &mysql.EstateModel{DB: db},
 	}
 
 	//initialize a new http.Server struct
