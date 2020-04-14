@@ -9,7 +9,7 @@ import (
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
-		http.NotFound(w, r)
+		app.notFound(w) //using the notFound helper
 		return
 	}
 
@@ -23,15 +23,13 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
-		app.errorLog.Println(err.Error())
-		http.Error(w, "Internal Server Error 1", 500)
+		app.serverError(w, err) //using serverError helper
 		return
 	}
 
 	err = ts.Execute(w, nil)
 	if err != nil {
-		app.errorLog.Println(err.Error())
-		http.Error(w, "Internal Server Error 2", 500)
+		app.serverError(w, err) //using serverError helper
 	}
 }
 
@@ -39,7 +37,7 @@ func (app *application) showEstate(w http.ResponseWriter, r *http.Request) {
 
 	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 	if err != nil || id < 1 {
-		http.NotFound(w, r)
+		app.notFound(w)
 		return
 	}
 
@@ -49,7 +47,7 @@ func (app *application) showEstate(w http.ResponseWriter, r *http.Request) {
 func (app *application) createEstate(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		w.Header().Set("Allow", "POST")
-		http.Error(w, "Method not allowed", 405)
+		app.clientError(w, http.StatusMethodNotAllowed) // Using the clientError() helper.
 		return
 	}
 	w.Write([]byte("Create new estate"))
