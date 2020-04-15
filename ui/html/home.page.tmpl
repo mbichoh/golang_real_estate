@@ -19,6 +19,7 @@
                           <th>Bedrooms</th>
                           <th>Washrooms</th>
                           <th>Short Description</th>
+                          <th>Date Created</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -34,6 +35,7 @@
                           <td>{{ .Bedroom }}</td>
                           <td>{{ .Washroom }}</td>
                           <td>{{ .ShortDesc }}</td>
+                          <td>{{ humanDate .CreatedAt}}</td>
                       </tr>
                       {{ end }}
                   </tbody>

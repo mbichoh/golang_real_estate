@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"runtime/debug"
+	"time"
 )
 
 //500 internal server error
@@ -24,6 +25,16 @@ func (app *application) notFound(w http.ResponseWriter) {
 	app.clientError(w, http.StatusNotFound)
 }
 
+//Create an addDefaultData helper
+func (app *application) addDefaultData(td *templateData, r *http.Request) *templateData{
+	if td == nil{
+		td = &templateData{}
+	}
+
+	td.CurrentYear = time.Now().Year()
+	return td
+}
+
 //render template from cache to avoid duplicate code
 func (app *application) render(w http.ResponseWriter, r *http.Request, name string, td *templateData){
 	ts, ok := app.templateCache[name]
@@ -34,7 +45,7 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, name stri
 
 	buf := new(bytes.Buffer)
 
-	err := ts.Execute(buf, td)
+	err := ts.Execute(buf, app.addDefaultData(td, r))
 	if err != nil{
 		app.serverError(w, err)
 		return
