@@ -1,13 +1,45 @@
 {{ template "base" .}}
 {{ define "title" }} Home {{ end }}
 {{ define "body" }}
-    <h3>Hello Nathan - Welcome to your project.</h3>
-    <p>Nothing yet you have added</p>
-    <button type="button" class="btn btn-primary">Primary</button>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <strong>Strong:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    </div>
+    <h3 class="text-center mt-5">Hello Nathan - Welcome to your project.</h3>
+    <div class="container">
+      <div class="row m-5">
+          <div class="col-md-12">
+            {{ if .Estates }}
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>#</th>
+                          <th>Name</th>
+                          <th>Agent ID</th>
+                          <th>Location</th>
+                          <th>County</th>
+                          <th>Square Fts</th>
+                          <th>Price (Kes)</th>
+                          <th>Bedrooms</th>
+                          <th>Washrooms</th>
+                          <th>Short Description</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {{ range .Estates }}
+                      <tr>
+                          <td scope="row">{{ .ID }}</td>
+                          <td>{{ .Name }}</td>
+                          <td>{{ .AgentName }}</td>
+                          <td>{{ .Address }}</td>
+                          <td>{{ .County }}</td>
+                          <td>{{ .SpaceArea }}</td>
+                          <td>{{ .Price }}</td>
+                          <td>{{ .Bedroom }}</td>
+                          <td>{{ .Washroom }}</td>
+                          <td>{{ .ShortDesc }}</td>
+                      </tr>
+                      {{ end }}
+                  </tbody>
+              </table>
+              {{ end }}
+          </div>
+      </div>
+  </div>
 {{ end }}

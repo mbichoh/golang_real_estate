@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"flag"
+	"html/template"
 	"log"
 	"net/http"
 	"os"
@@ -13,9 +14,10 @@ import (
 
 //aplication struct to hold the application wide dependencies for the web app
 type application struct {
-	errorLog *log.Logger
-	infoLog  *log.Logger
-	estates  *mysql.EstateModel
+	errorLog      *log.Logger
+	infoLog       *log.Logger
+	estates       *mysql.EstateModel
+	templateCache map[string]*template.Template
 }
 
 func main() {
@@ -38,10 +40,17 @@ func main() {
 	//close db before main() function exits
 	defer db.Close()
 
+	//initalize the template cache
+	templateCache, err := newTemplateCache("./ui/html/")
+	if err != nil {
+		errorLog.Fatal(err)
+	}
+
 	app := &application{
-		errorLog: errorLog,
-		infoLog:  infoLog,
-		estates:  &mysql.EstateModel{DB: db},
+		errorLog:      errorLog,
+		infoLog:       infoLog,
+		estates:       &mysql.EstateModel{DB: db},
+		templateCache: templateCache,
 	}
 
 	//initialize a new http.Server struct

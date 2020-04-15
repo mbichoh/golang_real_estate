@@ -18,6 +18,7 @@ type Agent struct {
 type Estate struct {
 	ID        int
 	AgentID   int
+	AgentName string
 	Name      string
 	Address   string
 	ShortDesc string

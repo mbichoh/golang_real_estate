@@ -34,11 +34,11 @@ func (m *EstateModel) Get(id int) (*models.Estate, error) {
 
 	e := &models.Estate{}
 
-	stmt := `SELECT name, address, county, price FROM estate WHERE id = ?`
+	stmt := `SELECT id, agent_id, name, address, county, space_area, price, bedroom, washroom, short_desc FROM estate WHERE id = ?`
 
 	row := m.DB.QueryRow(stmt, id)
 
-	err := row.Scan(&e.Name, &e.Address, &e.County, &e.Price)
+	err := row.Scan(&e.ID, &e.AgentID, &e.Name, &e.Address, &e.County, &e.SpaceArea, &e.Price, &e.Bedroom, &e.Washroom, &e.ShortDesc)
 	if err == sql.ErrNoRows {
 		return nil, models.ErrNoRecord
 	} else if err != nil {
@@ -51,7 +51,7 @@ func (m *EstateModel) Get(id int) (*models.Estate, error) {
 //fetch all estates limit(10) for pagination later
 func (m *EstateModel) Latest() ([]*models.Estate, error) {
 
-	stmt := `SELECT id, name, address, county, bedroom, washroom, price, space_area, short_desc FROM estate`
+	stmt := `SELECT e.id,  a.user_name,  e.name, e.address, e.county, e.space_area, e.price, e.bedroom, e.washroom, e.short_desc FROM estate e INNER JOIN agent a`
 
 	rows, err := m.DB.Query(stmt)
 	if err != nil {
@@ -65,7 +65,7 @@ func (m *EstateModel) Latest() ([]*models.Estate, error) {
 	for rows.Next() {
 		e := &models.Estate{}
 
-		err = rows.Scan(&e.ID, &e.Name, &e.Address, &e.County, &e.Bedroom, &e.Washroom, &e.Price, &e.SpaceArea, &e.ShortDesc)
+		err = rows.Scan(&e.ID, &e.AgentName, &e.Name, &e.Address, &e.County, &e.SpaceArea, &e.Price, &e.Bedroom, &e.Washroom, &e.ShortDesc)
 		if err != nil {
 			return nil, err
 		}

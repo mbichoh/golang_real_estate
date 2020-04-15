@@ -20,28 +20,10 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	for _, estate := range e {
-		fmt.Fprintf(w, "%v\n", estate)
-	}
+	app.render(w, r, "home.page.tmpl", &templateData{
+		Estates: e,
+	})
 
-	// files := []string{
-	// 	"./ui/html/home.page.tmpl",
-	// 	"./ui/html/base.layout.tmpl",
-	// 	"./ui/html/_footer.partial.tmpl",
-	// 	"./ui/html/_header.partial.tmpl",
-	// 	"./ui/html/_javascript.partial.tmpl",
-	// }
-
-	// ts, err := template.ParseFiles(files...)
-	// if err != nil {
-	// 	app.serverError(w, err) //using serverError helper
-	// 	return
-	// }
-
-	// err = ts.Execute(w, nil)
-	// if err != nil {
-	// 	app.serverError(w, err) //using serverError helper
-	// }
 }
 
 func (app *application) showEstate(w http.ResponseWriter, r *http.Request) {
@@ -52,7 +34,7 @@ func (app *application) showEstate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	s, err := app.estates.Get(id)
+	e, err := app.estates.Get(id)
 	if err == models.ErrNoRecord {
 		app.notFound(w)
 		return
@@ -61,7 +43,9 @@ func (app *application) showEstate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "%v", s)
+	app.render(w, r, "show.page.tmpl", &templateData{
+		Estate: e,
+	})
 }
 
 func (app *application) createEstate(w http.ResponseWriter, r *http.Request) {

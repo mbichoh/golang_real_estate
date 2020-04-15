@@ -1,0 +1,42 @@
+{{ template "base" .}}
+{{ define "title" }} Estate #{{ .Estate.ID }} {{ end }}
+{{ define "body"}}
+<div class="container">
+    <div class="row m-5">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Agent ID</th>
+                        <th>Location</th>
+                        <th>County</th>
+                        <th>Square Fts</th>
+                        <th>Price (Kes)</th>
+                        <th>Bedrooms</th>
+                        <th>Washrooms</th>
+                        <th>Short Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ with .Estate }}
+                    <tr>
+                        <td scope="row">{{ .ID }}</td>
+                        <td>{{ .Name }}</td>
+                        <td>{{ .AgentID }}</td>
+                        <td>{{ .Address }}</td>
+                        <td>{{ .County }}</td>
+                        <td>{{ .SpaceArea }}</td>
+                        <td>{{ .Price }}</td>
+                        <td>{{ .Bedroom }}</td>
+                        <td>{{ .Washroom }}</td>
+                        <td>{{ .ShortDesc }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{{ end }}
