@@ -1,3 +1,44 @@
 {{ define "footer" }}
-    <p class="text-center">Coding courtesy of <a href="?#">nattymbichoh@gmail.com</a> in {{.CurrentYear}}</p>
+<!--Footer-->
+<footer class="page-footer text-center font-small mt-4">
+
+    <!--Call to action-->
+    <div class="pt-4">
+      <a class="btn btn-outline-dark" href="#?" role="button">Download the app in playstore
+        <i class="fas fa-download ml-2"></i>
+      </a>
+    </div>
+    <!--/.Call to action-->
+
+    <hr class="my-4">
+
+    <!-- Social icons -->
+    <div class="pb-4">
+      <a href="#" title="Follow me on Facebook">
+        <i class="fab fa-facebook-f mr-3"></i>
+      </a>
+
+      <a href="#">
+        <i class="fab fa-twitter mr-3" title="Follow me on Twitter"></i>
+      </a>
+
+      <a href="#">
+        <i class="fab fa-bitbucket mr-3" title="Check my systems in Bitbucket"></i>
+      </a>
+
+      <a href="https://github.com/mbichoh" title="Check my other codes and systems in Github">
+        <i class="fab fa-github mr-3"></i>
+      </a>
+    </div>
+    <!-- Social icons -->
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © {{.CurrentYear}} Copyright:
+      <a href="#?" title="My coming soon website"> nathanmbicho.net </a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
 {{ end }}

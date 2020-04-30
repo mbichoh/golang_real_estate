@@ -1,0 +1,47 @@
+{{ define "navbar" }}
+<!--start navbar-->
+<nav class="navbar navbar-expand-md navbar-light">
+    <a class="navbar-brand" href="#">Real Estate</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <form class="form-inline ml-auto my-2 my-lg-0">
+            <input class="form-control" type="search" placeholder="Search by keywords">
+        </form>
+
+        </ul>
+        <ul class="navbar-nav m-auto mt-2 mx-5 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link font-weight-bolder mx-2" href="#">List your property</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link font-weight-bolder mx-2" href="#">Trips</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle font-weight-bolder mx-2" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="#">Meet-ups</a>
+                    <a class="dropdown-item" href="#">Tree houses</a>
+                    <a class="dropdown-item" href="#">Amphitheaters</a>
+                    <a class="dropdown-item" href="#">Co-working spaces</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link font-weight-bolder mx-2" href="#">Support</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link font-weight-bolder mx-2" title="Turn on notifications" href="#">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="nav-item mx-2">
+                    <img src="/static/img/avatar.svg" width="40" class="img-fluid rounded-circle" alt="">
+                    <span class="font-weight-normal textToMute">Hi Nathan</span>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!--end navbar-->
+{{ end }}

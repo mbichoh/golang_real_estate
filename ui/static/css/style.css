@@ -1,0 +1,74 @@
+body, .pagination{
+    background-color:#E2E8F0;
+}
+a{
+    text-decoration: none;
+}
+nav{
+    background-color: #f6f9fc;
+}
+.nav-link, .textToMute, .dropdown-item, label{
+    color: #6B7C93;
+}
+.result{
+    color: #283343;
+}
+.lineheight{
+    line-height: 0rem;
+}
+.toogleIcon{
+    font-size: 30px;
+    color: #6B7C93;
+}
+.curvyEdge{
+    border-radius: 5px;
+}
+.card{
+    background-color: #E2E8F0;
+    border-color: #E2E8F0;
+}
+.card-title{
+    color: #6B7C93;
+}
+.badge_totals{
+    background-color: #283343a6;
+    color: #f6f9fc;
+}
+
+.success-text{
+    color: #3ECF8E;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+.cfoot{
+    font-size: 16px;
+    color: #6B7C93;
+    font-weight: normal;
+}
+.txtSize{
+    font-size: 0.9rem;
+}
+
+.btnimg-detail-wish{
+    color: #6B7C93;
+}
+.btnimg-detail-wish:hover{
+    color: #f95353;
+}
+.badge-warning{
+    background-color: #fee5c7;
+    color: #283343c2;
+}
+.starFa{
+    color: #ffa833;
+}
+.btn-primary{
+    background-color: #408AF8;
+}
+a{
+    color: #408AF8;
+}
+footer{
+    background-color: #adbacc80;
+    color: #283343;
+}
